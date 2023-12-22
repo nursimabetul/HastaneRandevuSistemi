@@ -10,6 +10,20 @@ namespace HastaneRandevuSistemi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "AnaBilimDallari",
+                columns: table => new
+                {
+                    AnaBilimDaliID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AnaBilimDaliAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnaBilimDallari", x => x.AnaBilimDaliID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Kullanicilar",
                 columns: table => new
                 {
@@ -29,7 +43,7 @@ namespace HastaneRandevuSistemi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Randevu",
+                name: "Randevular",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,24 +53,27 @@ namespace HastaneRandevuSistemi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Randevu", x => x.Id);
+                    table.PrimaryKey("PK_Randevular", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Randevu_Kullanicilar_KullaniciId",
+                        name: "FK_Randevular_Kullanicilar_KullaniciId",
                         column: x => x.KullaniciId,
                         principalTable: "Kullanicilar",
                         principalColumn: "KullaniciId");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Randevu_KullaniciId",
-                table: "Randevu",
+                name: "IX_Randevular_KullaniciId",
+                table: "Randevular",
                 column: "KullaniciId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Randevu");
+                name: "AnaBilimDallari");
+
+            migrationBuilder.DropTable(
+                name: "Randevular");
 
             migrationBuilder.DropTable(
                 name: "Kullanicilar");

@@ -1,6 +1,5 @@
 ﻿using HastaneRandevuSistemi.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 
 namespace HastaneRandevuSistemi.Data
 {
@@ -11,6 +10,8 @@ namespace HastaneRandevuSistemi.Data
         }
 
         public DbSet<Kullanici> Kullanicilar { get; set; }
+        public DbSet<AnaBilimDali> AnaBilimDallari { get; set; }
+        public DbSet<Randevu> Randevular { get; set; }
 
     }
 

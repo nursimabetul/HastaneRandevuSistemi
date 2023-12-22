@@ -22,6 +22,27 @@ namespace HastaneRandevuSistemi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("HastaneRandevuSistemi.Models.AnaBilimDali", b =>
+                {
+                    b.Property<int>("AnaBilimDaliID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnaBilimDaliID"), 1L, 1);
+
+                    b.Property<string>("Aciklama")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AnaBilimDaliAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AnaBilimDaliID");
+
+                    b.ToTable("AnaBilimDallari");
+                });
+
             modelBuilder.Entity("HastaneRandevuSistemi.Models.Kullanici", b =>
                 {
                     b.Property<int>("KullaniciId")
@@ -81,7 +102,7 @@ namespace HastaneRandevuSistemi.Migrations
 
                     b.HasIndex("KullaniciId");
 
-                    b.ToTable("Randevu");
+                    b.ToTable("Randevular");
                 });
 
             modelBuilder.Entity("HastaneRandevuSistemi.Models.Randevu", b =>
