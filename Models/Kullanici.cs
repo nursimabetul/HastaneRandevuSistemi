@@ -1,7 +1,10 @@
-﻿namespace HastaneRandevuSistemi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HastaneRandevuSistemi.Models
 {
     public class Kullanici
     {
+        [Key]
         public int KullaniciId { get; set; }
         public string KullaniciAdi { get; set; }
         public string Sifre { get; set; }
