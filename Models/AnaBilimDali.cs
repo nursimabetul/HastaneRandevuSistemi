@@ -7,7 +7,7 @@ namespace HastaneRandevuSistemi.Models
         [Key]
         public int AnaBilimDaliID { get; set; }
         public string AnaBilimDaliAdi { get; set; }
-        public string Aciklama { get; set; }
+        public string? Aciklama { get; set; }// null olabilir.
  
     }
 }
