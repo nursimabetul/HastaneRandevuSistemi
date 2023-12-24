@@ -43,6 +43,27 @@ namespace HastaneRandevuSistemi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Poliklinikler",
+                columns: table => new
+                {
+                    PoliklinikId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PoliklinikAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AnaBilimDaliID = table.Column<int>(type: "int", nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Poliklinikler", x => x.PoliklinikId);
+                    table.ForeignKey(
+                        name: "FK_Poliklinikler_AnaBilimDallari_AnaBilimDaliID",
+                        column: x => x.AnaBilimDaliID,
+                        principalTable: "AnaBilimDallari",
+                        principalColumn: "AnaBilimDaliID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Randevular",
                 columns: table => new
                 {
@@ -62,6 +83,11 @@ namespace HastaneRandevuSistemi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Poliklinikler_AnaBilimDaliID",
+                table: "Poliklinikler",
+                column: "AnaBilimDaliID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Randevular_KullaniciId",
                 table: "Randevular",
                 column: "KullaniciId");
@@ -70,10 +96,13 @@ namespace HastaneRandevuSistemi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AnaBilimDallari");
+                name: "Poliklinikler");
 
             migrationBuilder.DropTable(
                 name: "Randevular");
+
+            migrationBuilder.DropTable(
+                name: "AnaBilimDallari");
 
             migrationBuilder.DropTable(
                 name: "Kullanicilar");

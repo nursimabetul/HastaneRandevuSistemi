@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HastaneRandevuSistemi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231224002659_InitialCreate")]
+    [Migration("20231224182906_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,32 @@ namespace HastaneRandevuSistemi.Migrations
                     b.ToTable("Kullanicilar");
                 });
 
+            modelBuilder.Entity("HastaneRandevuSistemi.Models.Poliklinik", b =>
+                {
+                    b.Property<int>("PoliklinikId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PoliklinikId"), 1L, 1);
+
+                    b.Property<string>("Aciklama")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AnaBilimDaliID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PoliklinikAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PoliklinikId");
+
+                    b.HasIndex("AnaBilimDaliID");
+
+                    b.ToTable("Poliklinikler");
+                });
+
             modelBuilder.Entity("HastaneRandevuSistemi.Models.Randevu", b =>
                 {
                     b.Property<int>("Id")
@@ -105,6 +131,17 @@ namespace HastaneRandevuSistemi.Migrations
                     b.HasIndex("KullaniciId");
 
                     b.ToTable("Randevular");
+                });
+
+            modelBuilder.Entity("HastaneRandevuSistemi.Models.Poliklinik", b =>
+                {
+                    b.HasOne("HastaneRandevuSistemi.Models.AnaBilimDali", "AnaBilimDali")
+                        .WithMany()
+                        .HasForeignKey("AnaBilimDaliID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnaBilimDali");
                 });
 
             modelBuilder.Entity("HastaneRandevuSistemi.Models.Randevu", b =>
