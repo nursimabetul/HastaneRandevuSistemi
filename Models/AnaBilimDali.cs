@@ -6,8 +6,13 @@ namespace HastaneRandevuSistemi.Models
     {
         [Key]
         public int AnaBilimDaliID { get; set; }
+
+        [Required(ErrorMessage = "Ana Bilim Dalı Adı zorunludur.")]
+        [Display(Name = "Ana Bilim Dalı Adı")]
         public string AnaBilimDaliAdi { get; set; }
-        public string Aciklama { get; set; }
+
+        [Display(Name = "Açıklama")]
+        public string? Aciklama { get; set; }// null olabilir.
  
     }
 }
