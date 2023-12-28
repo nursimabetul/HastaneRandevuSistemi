@@ -10,87 +10,90 @@ using HastaneRandevuSistemi.Models;
 
 namespace HastaneRandevuSistemi.Controllers
 {
-    public class AnaBilimDalisController : Controller
+    public class RandevuController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AnaBilimDalisController(ApplicationDbContext context)
+        public RandevuController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: AnaBilimDalis
+        // GET: Randevu
         public async Task<IActionResult> Index()
         {
-              return _context.AnaBilimDallari != null ? 
-                          View(await _context.AnaBilimDallari.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.AnaBilimDali'  is null.");
+            var applicationDbContext = _context.Randevular.Include(r => r.Doktor);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: AnaBilimDalis/Details/5
+        // GET: Randevu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.AnaBilimDallari == null)
+            if (id == null || _context.Randevular == null)
             {
                 return NotFound();
             }
 
-            var anaBilimDali = await _context.AnaBilimDallari
-                .FirstOrDefaultAsync(m => m.AnaBilimDaliID == id);
-            if (anaBilimDali == null)
+            var randevu = await _context.Randevular
+                .Include(r => r.Doktor)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (randevu == null)
             {
                 return NotFound();
             }
 
-            return View(anaBilimDali);
+            return View(randevu);
         }
 
-        // GET: AnaBilimDalis/Create
+        // GET: Randevu/Create
         public IActionResult Create()
         {
+            ViewData["DoktorID"] = new SelectList(_context.Doktor, "DoktorId", "DoktorId");
             return View();
         }
 
-        // POST: AnaBilimDalis/Create
+        // POST: Randevu/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnaBilimDaliID,AnaBilimDaliAdi,Aciklama")] AnaBilimDali anaBilimDali)
+        public async Task<IActionResult> Create([Bind("Id,DoktorID,Date")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(anaBilimDali);
+                _context.Add(randevu);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(anaBilimDali);
+            ViewData["DoktorID"] = new SelectList(_context.Doktor, "DoktorId", "DoktorId", randevu.DoktorID);
+            return View(randevu);
         }
 
-        // GET: AnaBilimDalis/Edit/5
+        // GET: Randevu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.AnaBilimDallari == null)
+            if (id == null || _context.Randevular == null)
             {
                 return NotFound();
             }
 
-            var anaBilimDali = await _context.AnaBilimDallari.FindAsync(id);
-            if (anaBilimDali == null)
+            var randevu = await _context.Randevular.FindAsync(id);
+            if (randevu == null)
             {
                 return NotFound();
             }
-            return View(anaBilimDali);
+            ViewData["DoktorID"] = new SelectList(_context.Doktor, "DoktorId", "DoktorId", randevu.DoktorID);
+            return View(randevu);
         }
 
-        // POST: AnaBilimDalis/Edit/5
+        // POST: Randevu/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AnaBilimDaliID,AnaBilimDaliAdi,Aciklama")] AnaBilimDali anaBilimDali)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DoktorID,Date")] Randevu randevu)
         {
-            if (id != anaBilimDali.AnaBilimDaliID)
+            if (id != randevu.Id)
             {
                 return NotFound();
             }
@@ -99,12 +102,12 @@ namespace HastaneRandevuSistemi.Controllers
             {
                 try
                 {
-                    _context.Update(anaBilimDali);
+                    _context.Update(randevu);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnaBilimDaliExists(anaBilimDali.AnaBilimDaliID))
+                    if (!RandevuExists(randevu.Id))
                     {
                         return NotFound();
                     }
@@ -115,49 +118,51 @@ namespace HastaneRandevuSistemi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(anaBilimDali);
+            ViewData["DoktorID"] = new SelectList(_context.Doktor, "DoktorId", "DoktorId", randevu.DoktorID);
+            return View(randevu);
         }
 
-        // GET: AnaBilimDalis/Delete/5
+        // GET: Randevu/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.AnaBilimDallari == null)
+            if (id == null || _context.Randevular == null)
             {
                 return NotFound();
             }
 
-            var anaBilimDali = await _context.AnaBilimDallari
-                .FirstOrDefaultAsync(m => m.AnaBilimDaliID == id);
-            if (anaBilimDali == null)
+            var randevu = await _context.Randevular
+                .Include(r => r.Doktor)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (randevu == null)
             {
                 return NotFound();
             }
 
-            return View(anaBilimDali);
+            return View(randevu);
         }
 
-        // POST: AnaBilimDalis/Delete/5
+        // POST: Randevu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.AnaBilimDallari == null)
+            if (_context.Randevular == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.AnaBilimDali'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Randevular'  is null.");
             }
-            var anaBilimDali = await _context.AnaBilimDallari.FindAsync(id);
-            if (anaBilimDali != null)
+            var randevu = await _context.Randevular.FindAsync(id);
+            if (randevu != null)
             {
-                _context.AnaBilimDallari.Remove(anaBilimDali);
+                _context.Randevular.Remove(randevu);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AnaBilimDaliExists(int id)
+        private bool RandevuExists(int id)
         {
-          return (_context.AnaBilimDallari?.Any(e => e.AnaBilimDaliID == id)).GetValueOrDefault();
+          return (_context.Randevular?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

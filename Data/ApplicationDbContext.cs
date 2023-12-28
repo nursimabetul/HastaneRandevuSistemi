@@ -15,6 +15,7 @@ namespace HastaneRandevuSistemi.Data
         public DbSet<Randevu> Randevular { get; set; }
         public DbSet<Poliklinik> Poliklinikler { get; set; }
         public DbSet<HastaneRandevuSistemi.Models.Doktor>? Doktor { get; set; }
+        public DbSet<HastaneRandevuSistemi.Models.Hasta>? Hasta { get; set; }
 
     }
 
