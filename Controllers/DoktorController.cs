@@ -57,7 +57,7 @@ namespace HastaneRandevuSistemi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DoktorId,Adi,Sifre,Soyadi,Email,PoliklinikID")] Doktor doktor)
+        public async Task<IActionResult> Create([Bind("DoktorId,PoliklinikID")] Doktor doktor)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace HastaneRandevuSistemi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DoktorId,Adi,Sifre,Soyadi,Email,PoliklinikID")] Doktor doktor)
+        public async Task<IActionResult> Edit(int id, [Bind("DoktorId,PoliklinikID")] Doktor doktor)
         {
             if (id != doktor.DoktorId)
             {

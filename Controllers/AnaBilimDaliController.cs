@@ -24,7 +24,7 @@ namespace HastaneRandevuSistemi.Controllers
         {
               return _context.AnaBilimDallari != null ? 
                           View(await _context.AnaBilimDallari.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.AnaBilimDali'  is null.");
+                          Problem("Entity set 'ApplicationDbContext.AnaBilimDallari'  is null.");
         }
 
         // GET: AnaBilimDalis/Details/5
@@ -143,7 +143,7 @@ namespace HastaneRandevuSistemi.Controllers
         {
             if (_context.AnaBilimDallari == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.AnaBilimDali'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.AnaBilimDallari'  is null.");
             }
             var anaBilimDali = await _context.AnaBilimDallari.FindAsync(id);
             if (anaBilimDali != null)

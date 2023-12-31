@@ -12,8 +12,6 @@ namespace HastaneRandevuSistemi.Models
         public string AnaBilimDaliAdi { get; set; }
         public string Aciklama { get; set; }
 
-        public virtual ICollection<Poliklinik> Poliklinikler { get; set; }
+        //public virtual ICollection<Poliklinik> Poliklinikler { get; set; }
     }
 }
-
-

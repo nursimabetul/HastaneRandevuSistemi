@@ -895,7 +895,7 @@ $.validator.addMethod( "phoneUS", function( phone_number, element ) {
 }, "Please specify a valid phone number" );
 
 /*
-* Valida CEPs do brasileiros:
+* Valida CEPs do braHastaneRandevuSistemieiros:
 *
 * Formatos aceitos:
 * 99999-999

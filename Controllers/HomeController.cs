@@ -1,5 +1,5 @@
-﻿using HastaneRandevuSistemi.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using HastaneRandevuSistemi.Models;
 using System.Diagnostics;
 
 namespace HastaneRandevuSistemi.Controllers
@@ -17,7 +17,10 @@ namespace HastaneRandevuSistemi.Controllers
         {
             return View();
         }
-
+        public IActionResult AnaBilimDali()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
