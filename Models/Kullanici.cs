@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace HastaneRandevuSistemi.Models
 {
-    public class Kullanici
+    public class Kullanici: IdentityUser
     {
         [Key]
         public int KullaniciId { get; set; }
-        public string KullaniciAdi { get; set; }
-        public string Sifre { get; set; }
         public string Adi { get; set; }
         public string Soyadi{ get; set; }
         public string Email { get; set; }
@@ -15,7 +14,7 @@ namespace HastaneRandevuSistemi.Models
         public string Adres { get; set; }
 
         // İlişki: Kullanıcının randevuları
-        public List<Randevu> Randevular { get; set; }
+        public List<Randevu>? Randevular { get; set; }
     }
 
 }

@@ -12,6 +12,7 @@ namespace HastaneRandevuSistemi.Models
         public string PoliklinikAdi { get; set; }
 
         [Required(ErrorMessage = "Ana Bilim Dalı zorunludur.")]
+        
         [ForeignKey("AnaBilimDali")]
         public int AnaBilimDaliID { get; set; }
 
@@ -20,5 +21,9 @@ namespace HastaneRandevuSistemi.Models
 
         [Display(Name = "Açıklama")]
         public string Aciklama { get; set; }
+        
+        // İlişki: polikilinik doktorları
+        public virtual ICollection<Doktor> Doktorlar { get; set; }
+
     }
 }
