@@ -19,6 +19,8 @@ namespace HastaneRandevuSistemi.Data
 
         public DbSet<CalismaGunu> CalismaGunleri { get; set; }
 
+        public DbSet<HastaneRandevuSistemi.Models.CalismaSaati>? CalismaSaati { get; set; }
+
 
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HastaneRandevuSistemi.Data;
+using HastaneRandevuSistemi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
-
-
 
 
 

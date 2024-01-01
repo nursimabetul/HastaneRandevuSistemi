@@ -6,9 +6,12 @@ namespace HastaneRandevuSistemi.Models
     public class Doktor
     {
         [Key]
-        public int DoktorId { get; set; }
-      
-        [ForeignKey("Poliklinik")]
+		public int DoktorId { get; set; }
+		public string DoktorAdi { get; set; }
+
+
+
+		[ForeignKey("Poliklinik")]
         public int PoliklinikID { get; set; }
 
         [Display(Name = "Poliklinik")]

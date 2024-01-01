@@ -15,6 +15,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="DoktorId" />
             <div class="form-group">
+                <label asp-for="DoktorAdi" class="control-label"></label>
+                <input asp-for="DoktorAdi" class="form-control" />
+                <span asp-validation-for="DoktorAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="PoliklinikID" class="control-label"></label>
                 <select asp-for="PoliklinikID" class="form-control" asp-items="ViewBag.PoliklinikID"></select>
                 <span asp-validation-for="PoliklinikID" class="text-danger"></span>

@@ -10,90 +10,87 @@ using HastaneRandevuSistemi.Models;
 
 namespace HastaneRandevuSistemi.Controllers
 {
-    public class DoktorController : Controller
+    public class CalismaSaatiController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public DoktorController(ApplicationDbContext context)
+        public CalismaSaatiController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Doktor
+        // GET: CalismaSaati
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Doktor.Include(d => d.Poliklinik);
-            return View(await applicationDbContext.ToListAsync());
+              return _context.CalismaSaati != null ? 
+                          View(await _context.CalismaSaati.ToListAsync()) :
+                          Problem("Entity set 'ApplicationDbContext.CalismaSaati'  is null.");
         }
 
-        // GET: Doktor/Details/5
+        // GET: CalismaSaati/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Doktor == null)
+            if (id == null || _context.CalismaSaati == null)
             {
                 return NotFound();
             }
 
-            var doktor = await _context.Doktor
-                .Include(d => d.Poliklinik)
-                .FirstOrDefaultAsync(m => m.DoktorId == id);
-            if (doktor == null)
+            var calismaSaati = await _context.CalismaSaati
+                .FirstOrDefaultAsync(m => m.CalismaSaatiId == id);
+            if (calismaSaati == null)
             {
                 return NotFound();
             }
 
-            return View(doktor);
+            return View(calismaSaati);
         }
 
-        // GET: Doktor/Create
+        // GET: CalismaSaati/Create
         public IActionResult Create()
         {
-            ViewData["PoliklinikID"] = new SelectList(_context.Poliklinikler, "PoliklinikId", "PoliklinikAdi");
             return View();
         }
 
-        // POST: Doktor/Create
+        // POST: CalismaSaati/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DoktorId,DoktorAdi,PoliklinikID")] Doktor doktor)
+        public async Task<IActionResult> Create([Bind("CalismaSaatiId,DoktorCalismaSaati")] CalismaSaati calismaSaati)
         {
-            //if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Add(doktor);
+                _context.Add(calismaSaati);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PoliklinikID"] = new SelectList(_context.Poliklinikler, "PoliklinikId", "PoliklinikAdi", doktor.PoliklinikID);
-            return View(doktor);
+            return View(calismaSaati);
         }
 
-        // GET: Doktor/Edit/5
+        // GET: CalismaSaati/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Doktor == null)
+            if (id == null || _context.CalismaSaati == null)
             {
                 return NotFound();
             }
 
-            var doktor = await _context.Doktor.FindAsync(id);
-            if (doktor == null)
+            var calismaSaati = await _context.CalismaSaati.FindAsync(id);
+            if (calismaSaati == null)
             {
                 return NotFound();
             }
-            ViewData["PoliklinikID"] = new SelectList(_context.Poliklinikler, "PoliklinikId", "PoliklinikAdi", doktor.PoliklinikID);
-            return View(doktor);
+            return View(calismaSaati);
         }
 
-        // POST: Doktor/Edit/5
+        // POST: CalismaSaati/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("DoktorId,DoktorAdi,PoliklinikID")] Doktor doktor)
+        public async Task<IActionResult> Edit(int id, [Bind("CalismaSaatiId,DoktorCalismaSaati")] CalismaSaati calismaSaati)
         {
-            if (id != doktor.DoktorId)
+            if (id != calismaSaati.CalismaSaatiId)
             {
                 return NotFound();
             }
@@ -102,12 +99,12 @@ namespace HastaneRandevuSistemi.Controllers
             {
                 try
                 {
-                    _context.Update(doktor);
+                    _context.Update(calismaSaati);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DoktorExists(doktor.DoktorId))
+                    if (!CalismaSaatiExists(calismaSaati.CalismaSaatiId))
                     {
                         return NotFound();
                     }
@@ -118,51 +115,49 @@ namespace HastaneRandevuSistemi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PoliklinikID"] = new SelectList(_context.Poliklinikler, "PoliklinikId", "PoliklinikAdi", doktor.PoliklinikID);
-            return View(doktor);
+            return View(calismaSaati);
         }
 
-        // GET: Doktor/Delete/5
+        // GET: CalismaSaati/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Doktor == null)
+            if (id == null || _context.CalismaSaati == null)
             {
                 return NotFound();
             }
 
-            var doktor = await _context.Doktor
-                .Include(d => d.Poliklinik)
-                .FirstOrDefaultAsync(m => m.DoktorId == id);
-            if (doktor == null)
+            var calismaSaati = await _context.CalismaSaati
+                .FirstOrDefaultAsync(m => m.CalismaSaatiId == id);
+            if (calismaSaati == null)
             {
                 return NotFound();
             }
 
-            return View(doktor);
+            return View(calismaSaati);
         }
 
-        // POST: Doktor/Delete/5
+        // POST: CalismaSaati/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Doktor == null)
+            if (_context.CalismaSaati == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Doktor'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.CalismaSaati'  is null.");
             }
-            var doktor = await _context.Doktor.FindAsync(id);
-            if (doktor != null)
+            var calismaSaati = await _context.CalismaSaati.FindAsync(id);
+            if (calismaSaati != null)
             {
-                _context.Doktor.Remove(doktor);
+                _context.CalismaSaati.Remove(calismaSaati);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DoktorExists(int id)
+        private bool CalismaSaatiExists(int id)
         {
-          return (_context.Doktor?.Any(e => e.DoktorId == id)).GetValueOrDefault();
+          return (_context.CalismaSaati?.Any(e => e.CalismaSaatiId == id)).GetValueOrDefault();
         }
     }
 }

@@ -59,7 +59,7 @@ namespace HastaneRandevuSistemi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,DoktorID,Date")] Randevu randevu)
         {
-            if (ModelState.IsValid)
+           // if (ModelState.IsValid)
             {
                 _context.Add(randevu);
                 await _context.SaveChangesAsync();

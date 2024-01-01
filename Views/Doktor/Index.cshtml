@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.DoktorAdi)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Poliklinik)
             </th>
             <th></th>
@@ -22,6 +25,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoktorAdi)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Poliklinik.PoliklinikAdi)
             </td>
