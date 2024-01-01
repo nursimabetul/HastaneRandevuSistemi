@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HastaneRandevuSistemi.Models;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace HastaneRandevuSistemi.Controllers
 {
@@ -8,14 +9,30 @@ namespace HastaneRandevuSistemi.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        Uri apiAdress = new Uri("https://localhost:7080/anaBilimDali/GetAnaBilimDali");
+        private readonly HttpClient _httpClient;     
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _httpClient = new HttpClient();
+            _httpClient.BaseAddress = apiAdress;
         }
+
+
 
         public IActionResult Index()
         {
-            return View();
+            List<AnaBilimDali> anadallist = new List<AnaBilimDali>();
+            HttpResponseMessage response = _httpClient.GetAsync(apiAdress).Result;
+            if (response != null)
+            {
+
+                string data= response.Content.ReadAsStringAsync().Result;
+                anadallist= JsonConvert.DeserializeObject<List<AnaBilimDali>>(data);
+            }
+
+            return View(anadallist);
         }
         public IActionResult AnaBilimDali()
         {

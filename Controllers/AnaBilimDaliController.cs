@@ -159,5 +159,16 @@ namespace HastaneRandevuSistemi.Controllers
         {
           return (_context.AnaBilimDallari?.Any(e => e.AnaBilimDaliID == id)).GetValueOrDefault();
         }
+
+
+        [HttpGet]
+        public IEnumerable <AnaBilimDali> GetAnaBilimDali()
+        {
+            var anabilimDallari = _context.AnaBilimDallari.ToList();
+            return anabilimDallari.ToList();
+        }
+
+
+
     }
 }
