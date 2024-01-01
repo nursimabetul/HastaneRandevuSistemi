@@ -15,8 +15,9 @@ namespace HastaneRandevuSistemi.Data
         public DbSet<Randevu> Randevular { get; set; }
         public DbSet<Poliklinik> Poliklinikler { get; set; }
         public DbSet<Doktor> Doktor { get; set; }
-        public DbSet<Hasta> Hasta { get; set; }
+        public DbSet<Hasta> Hastalar{ get; set; }
 
+        public DbSet<CalismaGunu> CalismaGunleri { get; set; }
 
 
     }

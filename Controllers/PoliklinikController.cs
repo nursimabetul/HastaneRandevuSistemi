@@ -59,14 +59,14 @@ namespace HastaneRandevuSistemi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PoliklinikId,PoliklinikAdi,AnaBilimDaliID,Aciklama")] Poliklinik poliklinik)
         {
-            
+
             //if (ModelState.IsValid)
             {
                 _context.Add(poliklinik);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliID", poliklinik.AnaBilimDaliID);
+            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliAdi", poliklinik.AnaBilimDaliID);
             return View(poliklinik);
         }
 
@@ -83,7 +83,7 @@ namespace HastaneRandevuSistemi.Controllers
             {
                 return NotFound();
             }
-            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliID", poliklinik.AnaBilimDaliID);
+            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliAdi", poliklinik.AnaBilimDaliID);
             return View(poliklinik);
         }
 
@@ -99,7 +99,7 @@ namespace HastaneRandevuSistemi.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 try
                 {
@@ -119,7 +119,7 @@ namespace HastaneRandevuSistemi.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliID", poliklinik.AnaBilimDaliID);
+            ViewData["AnaBilimDaliID"] = new SelectList(_context.AnaBilimDallari, "AnaBilimDaliID", "AnaBilimDaliAdi", poliklinik.AnaBilimDaliID);
             return View(poliklinik);
         }
 
@@ -156,14 +156,14 @@ namespace HastaneRandevuSistemi.Controllers
             {
                 _context.Poliklinikler.Remove(poliklinik);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PoliklinikExists(int id)
         {
-          return (_context.Poliklinikler?.Any(e => e.PoliklinikId == id)).GetValueOrDefault();
+            return (_context.Poliklinikler?.Any(e => e.PoliklinikId == id)).GetValueOrDefault();
         }
     }
 }

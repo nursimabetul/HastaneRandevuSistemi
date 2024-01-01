@@ -22,9 +22,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-						<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AnaBilimDali" asp-action="Index">AnaBilimDali</a>
-						</li>
+
+
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tanımlamar
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="AnaBilimDali" asp-action="Index">Ana Bilim Dalı Tanımlamaları</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Poliklinik" asp-action="Index">Poliklinik Tanımlamaları</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+
 						<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>

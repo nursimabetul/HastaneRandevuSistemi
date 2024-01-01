@@ -22,20 +22,20 @@ namespace HastaneRandevuSistemi.Controllers
         // GET: Hasta
         public async Task<IActionResult> Index()
         {
-              return _context.Hasta != null ? 
-                          View(await _context.Hasta.ToListAsync()) :
+              return _context.Hastalar != null ? 
+                          View(await _context.Hastalar.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Hasta'  is null.");
         }
 
         // GET: Hasta/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Hasta == null)
+            if (id == null || _context.Hastalar == null)
             {
                 return NotFound();
             }
 
-            var hasta = await _context.Hasta
+            var hasta = await _context.Hastalar
                 .FirstOrDefaultAsync(m => m.HastaId == id);
             if (hasta == null)
             {
@@ -70,12 +70,12 @@ namespace HastaneRandevuSistemi.Controllers
         // GET: Hasta/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Hasta == null)
+            if (id == null || _context.Hastalar == null)
             {
                 return NotFound();
             }
 
-            var hasta = await _context.Hasta.FindAsync(id);
+            var hasta = await _context.Hastalar.FindAsync(id);
             if (hasta == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace HastaneRandevuSistemi.Controllers
         // GET: Hasta/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Hasta == null)
+            if (id == null || _context.Hastalar == null)
             {
                 return NotFound();
             }
 
-            var hasta = await _context.Hasta
+            var hasta = await _context.Hastalar
                 .FirstOrDefaultAsync(m => m.HastaId == id);
             if (hasta == null)
             {
@@ -141,14 +141,14 @@ namespace HastaneRandevuSistemi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Hasta == null)
+            if (_context.Hastalar == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Hasta'  is null.");
             }
-            var hasta = await _context.Hasta.FindAsync(id);
+            var hasta = await _context.Hastalar.FindAsync(id);
             if (hasta != null)
             {
-                _context.Hasta.Remove(hasta);
+                _context.Hastalar.Remove(hasta);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace HastaneRandevuSistemi.Controllers
 
         private bool HastaExists(int id)
         {
-          return (_context.Hasta?.Any(e => e.HastaId == id)).GetValueOrDefault();
+          return (_context.Hastalar?.Any(e => e.HastaId == id)).GetValueOrDefault();
         }
     }
 }
